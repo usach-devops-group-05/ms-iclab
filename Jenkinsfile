@@ -46,7 +46,7 @@ pipeline {
             steps {
                 script{
                     nexusPublisher nexusInstanceId: 'nexus',
-                        nexusRepositoryId: ${NEXUS_REPOSITORY},
+                        nexusRepositoryId: 'repository-lab-mod4',
                         packages: [
                             [$class: 'MavenPackage',
                                 mavenAssetList: [
@@ -69,7 +69,7 @@ pipeline {
         stage("Step 6: Download from Nexus"){
             steps {
                 script{
-                    sh 'curl -X GET -u ${NEXUS_CREDENTIALS} "http://nexus:8081/repository/${NEXUS_REPOSITORY}/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar" -O'
+                    sh 'curl -X GET -u ${NEXUS_CREDENTIALS} "http://nexus:8081/repository/repository-lab-mod4/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar" -O'
                 }
             }
         }
