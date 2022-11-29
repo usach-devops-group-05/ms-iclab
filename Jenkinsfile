@@ -87,6 +87,7 @@ pipeline {
                 }
             }
         }
+    }
     post {
         always {
             sh "echo 'fase always executed post'"
