@@ -37,7 +37,7 @@ pipeline {
                 withSonarQubeEnv('sonarqube') {
                     sh "echo 'Calling sonar Service in another docker container!'"
                     // Run Maven on a Unix agent to execute Sonar.
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=project-laboratorio-mod4'
+                    sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=project-laboratorio-mod4'
                 }
             }
         }
