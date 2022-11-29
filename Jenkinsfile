@@ -5,7 +5,7 @@ def jsonParse(def json) {
 pipeline {
     agent any
     stages {
-        stage("Paso 1: Compliar"){
+        stage("Paso 1: Compiliar"){
             steps {
                 script {
                 sh "echo 'Compile Code!'"
@@ -32,6 +32,15 @@ pipeline {
                 }
             }
         }
+        stage("Paso 4: Análisis SonarQube"){
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh "echo 'Calling sonar Service in another docker container!'"
+                    // Run Maven on a Unix agent to execute Sonar.
+                    sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=project-laboratorio-mod4 -Dsonar.projectName=project-laboratorio-mod4'
+                }
+            }
+        }
         stage("Paso 4: Run .Jar"){
             steps {
                 script {
@@ -41,16 +50,16 @@ pipeline {
                 }
             }
         }
-stage("Paso 5: Test App"){
-            steps {
-                script {
-                sh "echo 'Test App!'"
-                // Run SpringBoot on a Unix agent.
-                sh "curl -X GET 'http://localhost:8080/rest/mscovid/test?msg=testing'"
+        stage("Paso 5: Test App"){
+                steps {
+                    script {
+                    sh "echo 'Test App!'"
+                    // Run SpringBoot on a Unix agent.
+                    sh "curl -X GET 'http://localhost:8080/rest/mscovid/test?msg=testing'"
+                    }
                 }
             }
-        }
-    }
+        } 
     post {
         always {
             sh "echo 'fase always executed post'"
