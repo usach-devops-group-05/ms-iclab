@@ -41,7 +41,7 @@ pipeline {
                 }
             }
         }
-        /* stage("Paso 4: Run .Jar"){
+        stage("Paso 4: Run .Jar"){
             steps {
                 script {
                 sh "echo 'Run .Jar!'"
@@ -58,7 +58,7 @@ pipeline {
                     sh "curl -X GET 'http://localhost:8080/rest/mscovid/test?msg=testing'"
                     }
                 }
-            }*/
+            }
         } 
     post {
         always {
