@@ -5,7 +5,6 @@ def jsonParse(def json) {
 pipeline {
     agent any
     environment {
-        NEXUS_REPOSITORY="repository-lab-mod4"
         NEXUS_CREDENTIALS=credentials('nexus-connect-lab-mod4')
     }
     stages {
@@ -46,7 +45,7 @@ pipeline {
             steps {
                 script{
                     nexusPublisher nexusInstanceId: 'nexus',
-                        nexusRepositoryId: '${NEXUS_REPOSITORY}',
+                        nexusRepositoryId: 'repository-lab-mod4',
                         packages: [
                             [$class: 'MavenPackage',
                                 mavenAssetList: [
