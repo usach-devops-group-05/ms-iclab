@@ -50,7 +50,6 @@ pipeline {
                 env.STAGE='Build Jar'
                 sh "echo 'Build .Jar!'"
                 sh "./mvnw clean package -e"
-                exit 127
                 }
             }
             post{
