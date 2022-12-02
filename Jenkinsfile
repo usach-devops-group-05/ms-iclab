@@ -63,12 +63,14 @@ pipeline {
         }
         stage("Step 4: SonarQube Analysis"){
             steps {
-                env.STAGE='SonarQube'
-                withSonarQubeEnv('sonarqube') {
-                    sh "echo 'Calling sonar Service in another docker container!'"
-                    // Run Maven on a Unix agent to execute Sonar.
-                    sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=project-laboratorio-mod4 -Dsonar.projectName=project-laboratorio-mod4'
-                }
+                script{
+                    env.STAGE='SonarQube'
+                    withSonarQubeEnv('sonarqube') {
+                        sh "echo 'Calling sonar Service in another docker container!'"
+                        // Run Maven on a Unix agent to execute Sonar.
+                        sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=project-laboratorio-mod4 -Dsonar.projectName=project-laboratorio-mod4'
+                    }
+                }    
             }
             post{
 				success{
