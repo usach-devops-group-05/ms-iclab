@@ -6,7 +6,7 @@ pipeline {
     agent any
     environment {
         NEXUS_CREDENTIALS=credentials('nexus-connect-lab-mod4')
-        channel='D044QHARRPH'
+        channel='C04B17VE0JH'
     }
     stages {
         stage("Step 1: Compile Code"){
@@ -50,6 +50,7 @@ pipeline {
                 env.STAGE='Build Jar'
                 sh "echo 'Build .Jar!'"
                 sh "./mvnw clean package -e"
+                exit 127
                 }
             }
             post{
