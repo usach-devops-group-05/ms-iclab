@@ -14,7 +14,7 @@ pipeline {
                 script {
                 env.STAGE='Compile'
                 env.GROUP='Grupo Nro. 5'
-                env.BRANCH_NAME=packageName()
+                env.BRANCH_NAME='${BRANCH_NAME}'
                 sh "echo 'Compile Code RodrigoShelsy'" 
                 sh "./mvnw clean compile -e"
                 }
