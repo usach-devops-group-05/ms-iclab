@@ -14,7 +14,7 @@ pipeline {
                 script {
                 env.STAGE='Compile'
                 env.GROUP='Grupo Nro. 5'
-                sh "echo 'Compile Code'"
+                sh "echo 'Compile Code RodrigoShelsy'"
                 sh "./mvnw clean compile -e"
                 }
             }
