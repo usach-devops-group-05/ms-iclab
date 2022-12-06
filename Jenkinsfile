@@ -14,17 +14,17 @@ pipeline {
                 script {
                 env.STAGE='Compile'
                 env.GROUP='Grupo Nro. 5'
-                env.BRANCH_NAME="${BRANCH_NAME}"
+                env.BRANCH_NAME=packageName()
                 sh "echo 'Compile Code RodrigoShelsy'" 
                 sh "./mvnw clean compile -e"
                 }
             }
             post{
 				success{
-					slackSend color: 'good', message: "[${env.GROUP}][Pipeline IC/CD][Rama: ", packageName() ,"][Stage: ${env.STAGE}][Resultado: Éxito/Success].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
+					slackSend color: 'good', message: "[${env.GROUP}][Pipeline IC/CD][Rama: ${env.BRANCH_NAME}][Stage: ${env.STAGE}][Resultado: Éxito/Success].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
 				}
 				failure{
-					slackSend color: 'danger',  message: "[${env.GROUP}][Pipeline IC/CD][Rama: ", packageName() ,"][Stage: ${env.STAGE}][Resultado: Error/Fail].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
+					slackSend color: 'danger',  message: "[${env.GROUP}][Pipeline IC/CD][Rama: ${env.BRANCH_NAME}][Stage: ${env.STAGE}][Resultado: Error/Fail].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
 				}
 			}
         }
