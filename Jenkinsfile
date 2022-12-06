@@ -21,10 +21,10 @@ pipeline {
             }
             post{
 				success{
-					slackSend color: 'good', message: "[${env.GROUP}][Pipeline IC/CD][Rama: ${env.BRANCH_NAME}][Stage: ${env.STAGE}][Resultado: Éxito/Success].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
+					slackSend color: 'good', message: "[${env.GROUP}][Pipeline IC/CD][Rama: ", packageName() ,"][Stage: ${env.STAGE}][Resultado: Éxito/Success].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
 				}
 				failure{
-					slackSend color: 'danger',  message: "[${env.GROUP}][Pipeline IC/CD][Rama: ${env.BRANCH_NAME}][Stage: ${env.STAGE}][Resultado: Error/Fail].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
+					slackSend color: 'danger',  message: "[${env.GROUP}][Pipeline IC/CD][Rama: ", packageName() ,"][Stage: ${env.STAGE}][Resultado: Error/Fail].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
 				}
 			}
         }
@@ -175,4 +175,9 @@ pipeline {
             sh "echo 'fase failure'"
         }
     }
+}
+
+def packageName() {
+    def matches = (BRANCH_NAME =~ /#package=([A-Za-z]+)/)
+    return matches ? matches[0][1].trim() : null
 }
