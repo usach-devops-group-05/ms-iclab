@@ -1,12 +1,12 @@
 package com.devopsusach2020.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import java.io.Serializable;
+
 
 public class Mundial implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3908000903498620526L;
 	
 	private int totalconfirmed;
