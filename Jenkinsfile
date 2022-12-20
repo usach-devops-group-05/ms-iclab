@@ -146,7 +146,7 @@ pipeline {
 				}
 			}
         }
-          stage("Step 8: Test Artifact - Sleep(Wait 20s)"){
+        stage("Step 8: Test Artifact - Sleep(Wait 20s)"){
             steps {
                 script{
                     env.STAGE='TestArtifact'
@@ -161,6 +161,22 @@ pipeline {
 					slackSend color: 'danger',  message: "[${env.GROUP}][Pipeline IC/CD][Rama: ${BRANCH_NAME}][Stage: ${env.STAGE}][Resultado: Error/Fail].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
 				}
 			}
+        }
+        stage("Step 9: Test Postman"){
+            steps {
+                script {
+                env.STAGE='TestPostman'
+                sh "newman run ./postman/maven2.postman_collection.json  -n 2  --delay-request 500"
+                }
+            }
+            post{
+                success{
+                    slackSend color: 'good', message: "[${env.GROUP}][Pipeline IC/CD][Rama: ${BRANCH_NAME}][Stage: ${env.STAGE}][Resultado: Éxito/Success].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
+                }
+                failure{
+                    slackSend color: 'danger',  message: "[${env.GROUP}][Pipeline IC/CD][Rama: ${BRANCH_NAME}][Stage: ${env.STAGE}][Resultado: Error/Fail].", teamDomain: 'devopsusach20-lzc3526', tokenCredentialId: 'token-slack-lab-mod4'
+                }
+            }
         }
     }
     post {
