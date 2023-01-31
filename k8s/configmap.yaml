@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  grupo: "5"
+  modulo: "7"
+kind: ConfigMap
+metadata:
+  name: cfg-app
+  namespace: ns-covid
