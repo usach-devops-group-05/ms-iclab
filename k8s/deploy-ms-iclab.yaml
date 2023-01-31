@@ -25,16 +25,16 @@ spec:
       - image: rodrigoghm/ms-iclab:1.0.0
         name: ms-iclab
         ports:
-          - containerPort: 8080
-        #readinessProbe:
-        #  httpGet:
-        #    path: /
-        #    port: 8080
-        #  initialDelaySeconds: 5
-        #  periodSeconds: 10
+          - containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /rest/mscovid/test?msg=testing
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
         livenessProbe:
           tcpSocket:
-            port: 8080
+            port: 8081
           initialDelaySeconds: 15
           periodSeconds: 20
         env:
